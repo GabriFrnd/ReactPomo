@@ -1,54 +1,32 @@
-# React + TypeScript + Vite
+## Temporizador Pomodoro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+⏱️ Esta é uma aplicação web projetada para ajudar você a gerenciar seu tempo de maneira eficaz utilizando a técnica Pomodoro. Com uma interface amigável e responsiva, a aplicação permite configurar ciclos de trabalho e pausas, ajudando a manter o foco e a produtividade.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ✨ Funcionalidades
 
-## Expanding the ESLint configuration
+- ⏳ **Cronômetro Personalizável**: Ajuste os tempos de trabalho e pausa de acordo com suas preferências.  
+- 📊 **Visualize o Progresso**: Acompanhe seus ciclos de trabalho e descanso em tempo real.  
+- 🔔 **Alertas Sonoros**: Receba notificações ao final de cada sessão para manter seu ritmo.  
+- 🌙 **Modo Claro e Escuro**: Escolha entre temas que garantem conforto visual em diferentes ambientes.  
+- ⚙️ **Design Minimalista**: Foco na produtividade com uma interface limpa e intuitiva.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 🧱 Tecnologias
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Esta aplicação web foi construída com:  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- ⚛️ **React**: Para interfaces dinâmicas e reativas.  
+- 🛡️ **TypeScript**: Para maior segurança e organização no código.  
+- ⚡ **Vite**: Para um ambiente de desenvolvimento rápido e eficiente.  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+### 💡 Sugestões
+
+Se você tiver ideias para melhorar esta aplicação, sinta-se à vontade para contribuir!  
+  
+- 🔧 **Contribua com código**: Faça um fork, implemente melhorias e envie um pull request.  
+- 💬 **Compartilhe suas ideias**: Entre em contato ou deixe um comentário na página do projeto.  
