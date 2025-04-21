@@ -9,7 +9,7 @@
 .link {
   align-items: center;
   display: flex;
-  color: var(--link-color);
+  color: var(--primary);
   font-size: 4.2rem;
   font-weight: bold;
   flex-direction: column;
