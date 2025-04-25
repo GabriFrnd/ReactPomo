@@ -9,9 +9,17 @@ import { Input } from '../Input';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
+
 export function MainForm() {
-  const { setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null); /* Referência (evita re-renderizações) */
+
+  const nextCycle = getNextCycle(state.currentCycle); /* Estado: ciclos de tempo */
+  const nextCycleType = getNextCycleType(nextCycle); /* Tipo de ciclo (work, short ou long) */
+
+  console.log(state);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); /* Prevenção: envio de formulário */
@@ -27,7 +35,7 @@ export function MainForm() {
     const newTask: TaskModel = { /* Nova tarefa + propriedades */
       id: Date.now().toString(),
       name: taskName,
-      type: 'work',
+      type: nextCycleType,
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
@@ -39,7 +47,7 @@ export function MainForm() {
         ...prevState,
         config: { ...prevState.config },
         activeTask: newTask,
-        currentCycle: 1, /* Conferir depois */
+        currentCycle: nextCycle,
         secondsRemaining: newTask.duration * 60, /* Conferir depois */
         formattedSecondsRemaining: '00:00', /* Conferir depois */
         tasks: [...prevState.tasks, newTask]
