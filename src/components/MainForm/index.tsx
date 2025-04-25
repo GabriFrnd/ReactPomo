@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import { PlayCircleIcon } from 'lucide-react';
 import { Button } from '../Button';
@@ -6,11 +6,45 @@ import { Button } from '../Button';
 import { Cycles } from '../Cycles';
 import { Input } from '../Input';
 
+import { TaskModel } from '../../models/TaskModel';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+
 export function MainForm() {
-  const [taskName, setTaskName] = useState(''); /* Valor da input (value + onChange) */
+  const { setState } = useTaskContext();
+  const taskNameInput = useRef<HTMLInputElement>(null); /* Referência (evita re-renderizações) */
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); /* Prevenção: envio de formulário */
+    if (taskNameInput.current === null) return;
+
+    const taskName = taskNameInput.current.value.trim(); /* Valor da input (tarefa do usuário) + remoção de espaços */
+
+    if (!taskName) {
+      alert('Digite a sua tarefa.');
+      return;
+    }
+
+    const newTask: TaskModel = { /* Nova tarefa + propriedades */
+      id: Date.now().toString(),
+      name: taskName,
+      type: 'work',
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      duration: 1
+    };
+
+    setState(prevState => {
+      return {
+        ...prevState,
+        config: { ...prevState.config },
+        activeTask: newTask,
+        currentCycle: 1, /* Conferir depois */
+        secondsRemaining: newTask.duration * 60, /* Conferir depois */
+        formattedSecondsRemaining: '00:00', /* Conferir depois */
+        tasks: [...prevState.tasks, newTask]
+      }
+    })
   }
 
   return (
@@ -20,8 +54,7 @@ export function MainForm() {
           id='input'
           type='text'
           label='Tarefa'
-          value={taskName} // Atualizações mediante digitação na input (valor inicial: '') 
-          onChange={(event) => setTaskName(event.target.value)} // Mudança no state a cada item digitado
+          ref={taskNameInput}
           placeholder='Digite uma tarefa'
         />
       </div>
