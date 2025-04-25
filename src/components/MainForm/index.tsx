@@ -12,14 +12,14 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+
 export function MainForm() {
   const { state, setState } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null); /* Referência (evita re-renderizações) */
 
   const nextCycle = getNextCycle(state.currentCycle); /* Estado: ciclos de tempo */
   const nextCycleType = getNextCycleType(nextCycle); /* Tipo de ciclo (work, short ou long) */
-
-  console.log(state);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); /* Prevenção: envio de formulário */
@@ -39,8 +39,10 @@ export function MainForm() {
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      duration: 1
+      duration: state.config[nextCycleType]
     };
+
+    const secondsRemaining = newTask.duration * 60;
 
     setState(prevState => {
       return {
@@ -48,8 +50,8 @@ export function MainForm() {
         config: { ...prevState.config },
         activeTask: newTask,
         currentCycle: nextCycle,
-        secondsRemaining: newTask.duration * 60, /* Conferir depois */
-        formattedSecondsRemaining: '00:00', /* Conferir depois */
+        secondsRemaining, 
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), 
         tasks: [...prevState.tasks, newTask]
       }
     })
