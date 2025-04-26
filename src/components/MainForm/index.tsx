@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Button } from '../Button';
 
 import { Cycles } from '../Cycles';
@@ -66,6 +66,7 @@ export function MainForm() {
           label='Tarefa'
           ref={taskNameInput}
           placeholder='Digite uma tarefa'
+          disabled={!!state.activeTask} /* Lógica: desativação da input + conversão para boolean */
         />
       </div>
 
@@ -80,7 +81,22 @@ export function MainForm() {
       )} 
 
       <div className='row'>
-        <Button icon={<PlayCircleIcon />} />
+        {!state.activeTask ? ( /* Não tem tarefa ativa */
+          <Button 
+            type='submit' 
+            icon={<PlayCircleIcon />} 
+            aria-label='Iniciar nova tarefa'
+            title='Iniciar nova tarefa'
+          />
+        ) : ( /* Tarefa ativa */
+          <Button 
+            type='button'
+            color='red'
+            icon={<StopCircleIcon />} 
+            aria-label='Interromper tarefa atual'
+            title='Interromper tarefa atual'
+          />
+        )}
       </div>
     </form>
   );
