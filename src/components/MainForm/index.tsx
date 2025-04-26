@@ -73,9 +73,11 @@ export function MainForm() {
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
 
-      <div className='row'>
-        <Cycles />
-      </div>
+      {state.currentCycle > 0 && ( /* Lógica: exibição de ciclos do formulário */
+        <div className='row'>
+          <Cycles />
+        </div>
+      )} 
 
       <div className='row'>
         <Button icon={<PlayCircleIcon />} />
