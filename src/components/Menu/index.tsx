@@ -1,6 +1,6 @@
 import { HistoryIcon, HouseIcon, MoonIcon, SettingsIcon, SunIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import { RouterLink } from '../RouterLink';
 
 import styles from './styles.module.css';
 type AvaliableThemes = 'dark' | 'light';
@@ -39,42 +39,42 @@ export function Menu() {
 
   return (
     <nav className={styles.menu}>
-      <Link
+      <RouterLink
         className={styles.link}
-        to='/' /* Não existe 'href' com 'Link' do React Router, apenas 'to' (path da rota) */
+        href='/' 
         aria-label='Página principal'
         title='Página principal'
       >
         <HouseIcon />
-      </Link>
+      </RouterLink>
 
-      <Link
+      <RouterLink
         className={styles.link}
-        to='#'
+        href='/history/'
         aria-label='Histórico'
         title='Histórico'
       >
         <HistoryIcon />
-      </Link>
+      </RouterLink>
 
-      <Link
+      <RouterLink
         className={styles.link}
-        to='#'
+        href='/settings/'
         aria-label='Configurações'
         title='Configurações'
       >
         <SettingsIcon />
-      </Link>
+      </RouterLink>
 
-      <Link
+      <a
         className={styles.link}
-        to='#'
+        href='#'
         aria-label='Mudar tema'
         title='Mudar tema'
         onClick={handleTheme}
       >
         {nextIcon[theme]}
-      </Link>
+      </a>
     </nav>
   );
 }
