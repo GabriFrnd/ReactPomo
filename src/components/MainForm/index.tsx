@@ -24,6 +24,8 @@ export function MainForm() {
   const nextCycle = getNextCycle(state.currentCycle); /* Estado: ciclos de tempo */
   const nextCycleType = getNextCycleType(nextCycle); /* Tipo de ciclo (work, short ou long) */
 
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
+
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); /* Prevenção: envio de formulário */
     showMessage.dismiss();
@@ -67,6 +69,7 @@ export function MainForm() {
           label='Tarefa'
           ref={taskNameInput}
           placeholder='Digite uma tarefa'
+          defaultValue={lastTaskName}
           disabled={!!state.activeTask} /* Lógica: desativação da input + conversão para boolean */
         />
       </div>
