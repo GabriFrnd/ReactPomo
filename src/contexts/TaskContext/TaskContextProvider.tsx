@@ -38,6 +38,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
       worker.terminate();
     }
 
+    document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`; /* Título da página no navegador */
     worker.postMessage(state); /* Caso tenha uma tarefa ativa */
   }, [state, worker]);
 
