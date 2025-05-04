@@ -13,11 +13,14 @@ import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, SortTasksOptions } from '../../utils/sortTasks';
 import { useEffect, useState } from 'react';
 
+import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+
 import styles from './styles.module.css';
 
 export function History() {
   const { state, dispatch } = useTaskContext();
+  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
 
   const [sortTasksOptions, setSortTasksOptions] = useState<SortTasksOptions>(() => {
@@ -39,6 +42,13 @@ export function History() {
     }));
   }, [state.tasks]);
 
+  useEffect(() => {
+    if (!confirmClearHistory) return;
+    setConfirmClearHistory(false);
+
+    dispatch({ type: TaskActionTypes.RESET_STATE }); 
+  }, [confirmClearHistory, dispatch]);
+
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
 
@@ -53,9 +63,12 @@ export function History() {
     });
   }
 
-  function handleResetHistory() {
-    if (!confirm('Tem certeza que deseja apagar o histórico?')) return;
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+  function handleResetHistory() { 
+    showMessage.dismiss();
+
+    showMessage.confirm('Deseja excluir o histórico de tarefas?', confirmation => {
+      setConfirmClearHistory(confirmation);
+    });
   }
 
   return (
