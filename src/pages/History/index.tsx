@@ -82,7 +82,7 @@ export function History() {
       <Container>
         {hasTasks && (
           <Heading>
-            <span>History</span>
+            <span>Histórico</span>
               <span className={styles.button}>
                 <Button
                   icon={<TrashIcon />}
