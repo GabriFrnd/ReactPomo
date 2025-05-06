@@ -11,9 +11,10 @@ import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function Settings() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
 
   const workInput = useRef<HTMLInputElement>(null);
   const shortInput = useRef<HTMLInputElement>(null);
@@ -51,6 +52,9 @@ export function Settings() {
       });
       return;
     }
+
+    dispatch({ type: TaskActionTypes.CHANGE_SETTINGS, payload: {work, short, long} });
+    showMessage.success('Configurações salvas com sucesso!');
   }
 
   return (
