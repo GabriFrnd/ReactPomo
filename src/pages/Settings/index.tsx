@@ -10,6 +10,8 @@ import { SaveIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
+import { showMessage } from '../../adapters/showMessage';
+
 export function Settings() {
   const { state } = useTaskContext();
 
@@ -19,12 +21,36 @@ export function Settings() {
 
   function handleSaveSettings(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    showMessage.dismiss();
 
-    const work = workInput.current?.value;
-    const short = shortInput.current?.value;
-    const long = longInput.current?.value;
+    const formErrors = [];
 
-    console.log(work, short, long);
+    const work = Number(workInput.current?.value);
+    const short = Number(shortInput.current?.value);
+    const long = Number(longInput.current?.value);
+
+    if (isNaN(work) || isNaN(short) || isNaN(long)) {
+      formErrors.push('Por favor, utilize apenas números.');
+    }
+
+    if (work < 1 || work > 99) {
+      formErrors.push('Por favor, digite apenas valores entre 1 e 99 para o tempo de foco.');
+    }
+
+    if (short < 1 || short > 30) {
+      formErrors.push('Por favor, digite valores entre 1 e 30 para o tempo de descanso curto.');
+    }
+
+    if (long < 1 || long > 60) {
+      formErrors.push('Por favor, digite valores entre 1 e 60 para o tempo de descanso longo.');
+    }
+
+    if (formErrors.length > 0) {
+      formErrors.forEach(error => {
+        showMessage.error(error);
+      });
+      return;
+    }
   }
 
   return (
