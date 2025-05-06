@@ -7,7 +7,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { SaveIcon } from 'lucide-react';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 import { showMessage } from '../../adapters/showMessage';
@@ -19,6 +19,10 @@ export function Settings() {
   const workInput = useRef<HTMLInputElement>(null);
   const shortInput = useRef<HTMLInputElement>(null);
   const longInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    document.title = 'Configurações - Chronos Pomodoro';
+  }, []);
 
   function handleSaveSettings(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
