@@ -30,3 +30,52 @@ Se você tiver ideias para melhorar esta aplicação, sinta-se à vontade para c
   
 - 🔧 **Contribua com código**: Faça um fork, implemente melhorias e envie um pull request.  
 - 💬 **Compartilhe suas ideias**: Entre em contato ou deixe um comentário na página do projeto.  
+
+---
+
+### ▶️ Como Executar o Projeto
+
+🚀 Siga os passos abaixo para executar o projeto em sua máquina local:
+
+#### 1. Clone o Repositório
+
+```bash
+🖥️ git clone https://github.com/GabriFrnd/ReactPomo.git
+cd ReactPomo
+```
+
+#### 2. Instale as Dependências
+
+📦 Certifique-se de ter o **Node.js** instalado (versão recomendada: 16 ou superior). Depois, instale as dependências com o gerenciador de pacotes:
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+#### 3. Execute o Projeto
+
+▶️ Inicie o ambiente de desenvolvimento:
+
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+#### 4. Acesse a Aplicação
+
+🌐 Abra o navegador e acesse `http://localhost:3000` para ver a aplicação em execução.
+
+---
+
+### 🔧 Extensões Recomendadas
+
+Para uma melhor experiência de desenvolvimento, instale as seguintes extensões no VS Code:
+
+- ✨ **ESLint**: Ajuda a identificar e corrigir problemas no código.
+- 🖌️ **Prettier**: Para formatação consistente do código.
+- 🛠️ **TypeScript Hero**: Facilita a navegação e organização de módulos TypeScript.
+
+🛡️ Com esses passos e recomendações, você estará pronto para explorar e contribuir para o Temporizador Pomodoro!
